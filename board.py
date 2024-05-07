@@ -86,4 +86,3 @@ class Board:
             print(string)
         print(string2)
         
-
