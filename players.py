@@ -41,14 +41,14 @@ class MinimaxPlayer(Player):
     def get_move(self, board):
         return self.minimax()
     
+    def clone(self):
+        return MinimaxPlayer(self.symbol)
+    
+    # returns a tuple for row and col after running minimax algorithm
     def minimax(self):
         row = 0
         col = 0
+        #TODO: implement minimax algorithm
         return row, col
        
-        
-
-
-
-
-
+  
