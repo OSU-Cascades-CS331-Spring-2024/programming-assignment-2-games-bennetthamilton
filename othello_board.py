@@ -119,9 +119,9 @@ class OthelloBoard(Board):
         self.last_move = (col, row)
 
     # returns 1 if player 1 wins, -1 if player 2 wins, 0 if tie or game not over
-    def utility(self):
-        p1 = self.p1_symbol
-        p2 = self.p2_symbol
+    def utility(self, symbol):
+        p1 = symbol
+        p2 = self.p1_symbol if symbol == self.p2_symbol else self.p2_symbol
 
         # if either player has legal moves remaining, game is not over
         if self.has_legal_moves_remaining(p1) or self.has_legal_moves_remaining(p2):
