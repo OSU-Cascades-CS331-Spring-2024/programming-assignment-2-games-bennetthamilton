@@ -130,7 +130,7 @@ class OthelloBoard(Board):
             if self.count_score(p1) > self.count_score(p2):
                 return 1
             # player 2 is the minimizing player so if score is higher, player 2 wins
-            elif self.count_score(p2) < self.count_score(p1):
+            elif self.count_score(p2) > self.count_score(p1):
                 return -1
             else:
                 return 0
