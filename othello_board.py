@@ -86,8 +86,6 @@ class OthelloBoard(Board):
             (next_col, next_row) = self.set_coords_in_direction(col, row, d)
             return 1+ self.flip_pieces_helper(next_col, next_row, symbol, d)
 
-
-
     def flip_pieces(self, col, row, symbol):
         pieces_flipped = 0
         if not self.is_in_bounds(col, row):
@@ -119,6 +117,22 @@ class OthelloBoard(Board):
         self.set_cell(col, row, symbol)
         self.flip_pieces(col, row, symbol)
 
+    # returns 1 if player 1 wins, -1 if player 2 wins, 0 if tie or game not over
+    def utility(self):
+        p1 = self.p1_symbol
+        p2 = self.p2_symbol
 
+        # if either player has legal moves remaining, game is not over
+        if self.has_legal_moves_remaining(p1) or self.has_legal_moves_remaining(p2):
+            return 0
+        else:
+            # player 1 is the maximizing player so if score is higher, player 1 wins
+            if self.count_score(p1) > self.count_score(p2):
+                return 1
+            # player 2 is the minimizing player so if score is higher, player 2 wins
+            elif self.count_score(p2) < self.count_score(p1):
+                return -1
+            else:
+                return 0
 
 
