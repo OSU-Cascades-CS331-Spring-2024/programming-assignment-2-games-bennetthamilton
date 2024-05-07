@@ -135,4 +135,13 @@ class OthelloBoard(Board):
             else:
                 return 0
 
-
+    # returns a list of tuples of all possible moves for a given symbol at given state
+    def successors(self, symbol):
+        moves = []
+        # iterate through all cells on the board
+        for c in range (0, self.cols):
+            for r in range (0, self.rows):
+                # if cell is empty and move is legal, add to list of possible moves
+                if self.is_cell_empty(c, r) and self.is_legal_move(c, r, symbol):
+                    moves.append((c, r))
+        return moves
