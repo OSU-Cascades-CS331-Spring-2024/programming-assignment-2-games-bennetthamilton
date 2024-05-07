@@ -37,6 +37,14 @@ class MinimaxPlayer(Player):
             self.oppSym = 'O'
         else:
             self.oppSym = 'X'
+
+    def get_move(self, board):
+        return self.minimax()
+    
+    def minimax(self):
+        row = 0
+        col = 0
+        return row, col
        
         
 
