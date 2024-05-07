@@ -137,7 +137,7 @@ class OthelloBoard(Board):
 
     # returns a list of possible board states after a move
     def successors(self, symbol):
-        successor_boards = []
+        moves = []
         # iterate through all cells on the board
         for c in range (0, self.cols):
             for r in range (0, self.rows):
@@ -145,5 +145,5 @@ class OthelloBoard(Board):
                 if self.is_cell_empty(c, r) and self.is_legal_move(c, r, symbol):
                     new_board = self.clone_of_board()   # make a copy of current state
                     new_board.play_move(c, r, symbol)   # play move
-                    successor_boards.append(new_board)  # add to list
-        return successor_boards
+                    moves.append((c, r))                # add move to list
+        return moves
