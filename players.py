@@ -2,6 +2,8 @@
     Defines Player class, and subclasses Human and Minimax Player.
 '''
 
+import time
+
 class Player:
     def __init__(self, symbol):
         self.symbol = symbol
@@ -38,6 +40,8 @@ class MinimaxPlayer(Player):
         else:
             self.oppSym = 'X'
         self.depth = self.get_depth_from_user()
+        self.total_move_time = 0
+        self.num_moves = 0
 
     def get_depth_from_user(self):
         return int(input("Enter depth for Minimax player: "))
@@ -46,6 +50,11 @@ class MinimaxPlayer(Player):
         return MinimaxPlayer(self.symbol)
 
     def get_move(self, board):
+        start = time.time()
+        col, row = self.minimax(board, self.depth)
+        end = time.time()
+        self.total_move_time += end - start
+        self.num_moves += 1
         return self.minimax(board, self.depth)
     
     # returns a tuple for row and col decision after running minimax algorithm
@@ -100,3 +109,7 @@ class MinimaxPlayer(Player):
     # returns the heuristic value of the board state
     def heuristic(self, board):
         return board.utility(self.symbol) - board.utility(self.oppSym)
+    
+    # returns the average time taken per move
+    def get_avg_move_time(self):
+        return self.total_move_time / self.num_moves
