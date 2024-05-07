@@ -44,11 +44,22 @@ class MinimaxPlayer(Player):
     def clone(self):
         return MinimaxPlayer(self.symbol)
     
-    # returns a tuple for row and col after running minimax algorithm
+    # returns a tuple for row and col decision after running minimax algorithm
     def minimax(self):
+        # TODO: Implement minimax algorithm
+        # placeholder code
         row = 0
         col = 0
-        #TODO: implement minimax algorithm
         return row, col
        
-  
+    # returns the max value of the board state
+    def max_value(self, board):
+        pass
+
+    # returns the min value of the board state
+    def min_value(self, board):
+        pass
+
+    # returns the heuristic value of the board state
+    def heuristic(self, board):
+        pass
