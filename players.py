@@ -65,13 +65,13 @@ class MinimaxPlayer(Player):
         best_row = None
 
         # iterate through all possible moves
-        for successor in board.successors(self.symbol):
+        for moves in board.successors(self.symbol):
             # get min value of board state
-            value, _, _ = self.min_value(successor, depth - 1)
+            value, _, _ = self.min_value(moves, depth - 1)
             # update best values if value is greater
             if value > max_value:
                 max_value = value
-                best_col, best_row = successor.last_move
+                best_col, best_row = moves[-1] # get last move
 
         return max_value, best_col, best_row
 
@@ -87,14 +87,14 @@ class MinimaxPlayer(Player):
         best_row = None
 
         # iterate through all possible moves
-        for successor in board.successors(self.oppSym):
+        for moves in board.successors(self.oppSym):
             # get max value of board state
-            value, _, _ = self.max_value(successor, depth - 1)
+            value, _, _ = self.max_value(moves, depth - 1)
             # update best values if value is less
             if value < min_value:
                 min_value = value
-                best_col, best_row = successor.last_move
-                
+                best_col, best_row = moves[-1] # get last move
+
         return min_value, best_col, best_row
 
     # returns the heuristic value of the board state
