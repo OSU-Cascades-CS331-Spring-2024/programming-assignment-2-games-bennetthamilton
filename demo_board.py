@@ -1,8 +1,6 @@
-#This file exists to display some board functionality
-#Erich Kramer 4/26/18
-#
-#
-#
+'''
+Used for testing board functionality
+'''
 
 
 from board import Board
