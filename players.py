@@ -41,29 +41,62 @@ class MinimaxPlayer(Player):
 
     def get_depth_from_user(self):
         return int(input("Enter depth for Minimax player: "))
-
-    def get_move(self, board):
-        return self.minimax()
     
     def clone(self):
         return MinimaxPlayer(self.symbol)
+
+    def get_move(self, board):
+        return self.minimax(board, self.depth)
     
     # returns a tuple for row and col decision after running minimax algorithm
-    def minimax(self):
-        # TODO: Implement minimax algorithm
-        # placeholder code
-        row = 0
-        col = 0
-        return row, col
+    def minimax(self, board, depth):
+        _, col, row = self.max_value(board, depth)
+        return col, row
        
-    # returns the max value of the board state
-    def max_value(self, board):
-        pass
+    # returns the max value, best column, and best row of the board state
+    def max_value(self, board, depth):
+        # return utility if depth is 0 or no legal moves
+        if depth == 0 or not board.has_legal_moves_remaining(self.symbol):
+            return self.heuristic(board), None, None
+        
+        # initialize best values
+        max_value = float('-inf')   # negative infinity
+        best_col = None
+        best_row = None
 
-    # returns the min value of the board state
-    def min_value(self, board):
-        pass
+        # iterate through all possible moves
+        for successor in board.successors(self.symbol):
+            # get min value of board state
+            value, _, _ = self.min_value(successor, depth - 1)
+            # update best values if value is greater
+            if value > max_value:
+                max_value = value
+                best_col, best_row = successor.last_move
+
+        return max_value, best_col, best_row
+
+    # returns the min value, best column, and best row of the board state
+    def min_value(self, board, depth):
+        # return utility if depth is 0 or no legal moves
+        if depth == 0 or not board.has_legal_moves_remaining(self.oppSym):
+            return self.heuristic(board), None, None
+        
+        # initialize best values
+        min_value = float('inf')
+        best_col = None
+        best_row = None
+
+        # iterate through all possible moves
+        for successor in board.successors(self.oppSym):
+            # get max value of board state
+            value, _, _ = self.max_value(successor, depth - 1)
+            # update best values if value is less
+            if value < min_value:
+                min_value = value
+                best_col, best_row = successor.last_move
+                
+        return min_value, best_col, best_row
 
     # returns the heuristic value of the board state
     def heuristic(self, board):
-        pass
+        return board.utility(self.symbol) - board.utility(self.oppSym)
