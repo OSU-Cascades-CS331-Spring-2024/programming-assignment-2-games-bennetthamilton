@@ -31,13 +31,16 @@ class HumanPlayer(Player):
 
 class MinimaxPlayer(Player):
 
-    def __init__(self, symbol, depth):
+    def __init__(self, symbol,):
         Player.__init__(self, symbol)
         if symbol == 'X':
             self.oppSym = 'O'
         else:
             self.oppSym = 'X'
-        self.depth = depth
+        self.depth = self.get_depth_from_user()
+
+    def get_depth_from_user(self):
+        return int(input("Enter depth for Minimax player: "))
 
     def get_move(self, board):
         return self.minimax()
