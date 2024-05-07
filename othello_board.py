@@ -10,7 +10,7 @@ class OthelloBoard(Board):
         Board.__init__(self, rows, cols)
         self.p1_symbol = p1
         self.p2_symbol = p2
-
+        self.last_move = None
 
 #PYTHON: this function is substitute for clone. call as New = Old.clone_of_board()
     def clone_of_board(self):
@@ -116,6 +116,7 @@ class OthelloBoard(Board):
     def play_move(self, col, row, symbol):
         self.set_cell(col, row, symbol)
         self.flip_pieces(col, row, symbol)
+        self.last_move = (col, row)
 
     # returns 1 if player 1 wins, -1 if player 2 wins, 0 if tie or game not over
     def utility(self):
@@ -145,5 +146,6 @@ class OthelloBoard(Board):
                 if self.is_cell_empty(c, r) and self.is_legal_move(c, r, symbol):
                     new_board = self.clone_of_board()   # make a copy of current state
                     new_board.play_move(c, r, symbol)   # play move
-                    moves.append((c, r))                # add move to list
+                    moves.append(new_board)             # add move to list
+
         return moves
