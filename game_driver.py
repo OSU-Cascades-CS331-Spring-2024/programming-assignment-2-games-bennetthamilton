@@ -26,6 +26,8 @@ class GameDriver:
 
         self.board = OthelloBoard(num_rows, num_cols, self.p1.symbol, self.p2.symbol)
         self.board.initialize()
+        self.p1type = p1type
+        self.p2type = p2type
 
     def display(self):
         print("Player 1 (", self.p1.symbol, ") score: ",
@@ -77,6 +79,12 @@ class GameDriver:
             print("Player 1 Wins!")
         else:
             print("Player 2 Wins!")
+
+        # print stats
+        if self.p1type == "minimax" or self.p1type == "ai":
+            print("Player 1 average move time: ", self.p1.get_avg_move_time())
+        if self.p2type == "minimax" or self.p2type == "ai":
+            print("Player 2 average move time: ", self.p2.get_avg_move_time())
 
 
 if __name__ == "__main__":
