@@ -108,16 +108,7 @@ class MinimaxPlayer(Player):
 
     # returns the heuristic value of the board state
     def heuristic(self, board):
-        p1 = self.symbol
-        successor_utilities = []
-
-        # iterate through all possible moves
-        for successor in board.successors(self.symbol):
-            # get utility of board state
-            utility = successor.utility(p1)
-            successor_utilities.append(utility)
-        
-        return max(successor_utilities)
+        return board.utility(self.symbol) - board.utility(self.oppSym)
     
     # returns the average time taken per move
     def get_avg_move_time(self):
