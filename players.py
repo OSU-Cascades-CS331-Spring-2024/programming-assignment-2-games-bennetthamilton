@@ -109,13 +109,12 @@ class MinimaxPlayer(Player):
     # returns the heuristic value of the board state
     def heuristic(self, board):
         p1 = self.symbol
-        p2 = self.oppSym
         successor_utilities = []
 
         # iterate through all possible moves
         for successor in board.successors(self.symbol):
             # get utility of board state
-            utility = successor.utility(successor, p1, p2)
+            utility = successor.utility(p1)
             successor_utilities.append(utility)
         
         return max(successor_utilities)
