@@ -115,7 +115,7 @@ class MinimaxPlayer(Player):
         # iterate through all possible moves
         for successor in board.successors(self.symbol):
             # get utility of board state
-            utility = self.utility(successor, p1, p2)
+            utility = successor.utility(successor, p1, p2)
             successor_utilities.append(utility)
         
         return max(successor_utilities)
